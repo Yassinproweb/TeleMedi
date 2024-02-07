@@ -1,0 +1,158 @@
+:root {
+  /* colors for text and backgrounds */
+  --w: #fefeff;
+  --f: #f5f5f9;
+  --d: #1a1b23;
+  --t: #7d8389;
+  --l: #98CCFF;
+  --b: #387CFF;
+  
+  /* padding values */
+  --x: 3.5vw;
+  --y: 3.5rem;
+}
+
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  transition: all 350ms ease-out;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--w);
+  font-family: "Open Sans";
+}
+
+h1, h2, h3, h4, h5, h6,
+.label {
+  font-family: "Mulish";
+}
+
+div, section, footer, form, ul, nav, header, article {
+  display: flex;
+}
+
+section, header, footer {
+  width: 100%;
+  padding: var(--x);
+}
+
+section, footer {
+  padding-block: var(--y);
+}
+
+section {
+  padding-top: 85px;
+}
+
+img {
+  pointer-events: none;
+}
+
+input, select, button {
+  outline: none;
+  appearance: none;
+}
+
+li {
+  list-style: none;
+}
+
+
+/* header and navbar */
+.scroll {
+  background: var(--w);
+  box-shadow: 2px 3px 9px -3px #1a1b2337;
+}
+
+.scroll h3 {
+  color: var(--d);
+}
+
+.scroll nav a {
+  color: var(--t);
+}
+
+.scroll button:nth-of-type(1) {
+  background: var(--d);
+  color: var(--f);
+}
+
+nav a {
+  font-weight: 400;
+  color: var(--w);
+}
+
+nav a:hover {
+  color: var(--l);
+}
+
+
+/* hero section */
+h1 {
+  text-shadow: 2px 3px 5px var(--t);
+}
+
+
+/* doctors section */
+.specialist h4,
+.procedure h4,
+.specialist p,
+.procedure p {
+  pointer-events: none;
+}
+
+.specialist:hover,
+.procedure:hover {
+  background: var(--b);
+}
+
+.specialist:hover [alt="doctorb"] {
+  visibility: hidden;
+  display: none;
+}
+
+.specialist:hover [alt="doctorw"] {
+  visibility: visible;
+  display: block;
+}
+
+.specialist:hover h4,
+.procedure:hover h4,
+.specialist:hover p,
+.procedure:hover p,
+.procedure:hover button {
+  color: var(--w);
+}
+
+.specialist:hover p,
+.procedure:hover p {
+  opacity: 0.75;
+}
+
+
+/* treatment section*/
+input[type="radio"]:checked + .label + .arcontent {
+  max-height: 300px;
+  display: block;
+}
+
+
+/* footer */
+footer .follow a:hover {
+  color: var(--b);
+}
+
+footer ul li {
+  opacity: 0.75;
+}
+
+footer ul li:hover {
+  color: var(--l);
+}
