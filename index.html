@@ -8,14 +8,13 @@
   <!-- link to google fonts-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
 
   <!-- linkto tailwindcss -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- link to phosphor icons -->
-  <link rel="stylesheet" href="regular.css">
-  <link rel="stylesheet" href="bold.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
   <!-- Custom Styles -->
   <link rel="stylesheet" href="style.css">
@@ -28,155 +27,525 @@
 </head>
 <body>
   <header class="fixed top-0 left-0 w-full items-center justify-between bg-[--] py-3.5 z-[1000]">
-    <div id="title" class="w-fit items-center gap-1.5">
+    <div class="w-fit items-center gap-1.5 title">
       <img src="/logo.png" alt="Medicex logo" class="w-9">
-      <h3 class="text-4xl text-[--l] font-extrabold mono">TeleMedi</h3>
+      <h3 class="text-4xl text-[--w] font-extrabold mono">TeleMedi</h3>
     </div>
-    
-    <nav class="w-fit items-center justify-center gap-5">
-      <a href="#" class="text-lg">Home</a>
-      <a href="#doctors" class="text-lg">Doctors</a>
-      <a href="#treatment" class="text-lg">Treatment</a>
-      <a href="#appointments" class="text-lg">Appointments</a>
-      <a href="#blogs" class="text-lg">Articles</a>
-    </nav>
-    
-    <div class="items-center justify-end gap-3.5">
-      <button class="text-[--d] px-7 py-3 rounded-lg bg-[--f] hover:opacity-75">Login</button>
-      <button class="text-[--w] px-7 py-3 rounded-lg bg-[--b] hover:opacity-75">Sign Up</button>
-    </div>
-  </header>
 
-  <section id="hero" class="relative w-full aspect-[16/9] flex-col items-center justify-center gap-7">
-    <img src="/beds.jpg" alt="doctor in surgery room" class="absolute w-full object-center object-cover aspect-[16/9] top-0 left-0 brightness-[61%] contrast-[120%]">
-    <div class="w-3/4 flex-col items-center justify-center gap-2.5 z-10">
-      <h1 class="text-[--f] text-6xl text-center font-extrabold capitalize z-10">make appointments easy and fast</h1>
-      <p class="text-[--w] font-medium text-xl">Telemedicine services available to bridge gaps between doctors and patients.</p>
-    </div>
-    <div class="w-3/5 items-center justify-center gap-5 z-10">
-      <label for="search" class="text-[--w] text-lg font-medium bg-[--b] rounded-lg px-7 py-3">Search:</label>
-      <input type="search" id="search" list="searchList" name="search" class="w-full py-3 px-9 rounded-lg bg-[--w] text-lg text-[--t] placeholder:text-[--t] placeholder:opacity-50" placeholder="Search for doctors and their respective specialities">
-      
+    <div class="w-[55%] items-center gap-2 rounded-3xl bg-[--w] p-1 overflow-hidden outline outline-1 outline-offset-[0px] outline-[--b]">
+      <span class="flex items-center justify-center w-9 aspect-square rounded-3xl bg-[#CBE5FF] shadow-sm shadow-[--l] outline outline-1 outline-offset-[0px] outline-[--b]">
+        <i class="ph-bold ph-magnifying-glass text-xl text-[--b]"></i>
+      </span>
+      <input type="search" name="search" id="search" list="searchList" class="w-full py-1.5 px-0.5 pr-5 text-base text-[--t] font-medium placeholder:text-[--t] placeholder:opacity-75" placeholder="Medical & Health Care">
       <datalist id="searchList" class="opacity-0">
         <!-- Options will be populated dynamically from the JSON file -->
       </datalist>
     </div>
+
+    <div id="titles" class="w-fit items-center justify-end gap-7 text-[--w] text-[41px]">
+      <i id="mapLocal" class="ph-fill ph-map-pin-area"></i>
+      <i id="bookings" class="ph-fill ph-address-book-tabs"></i>
+      <i id="patients" class="ph-fill ph-user-circle"></i>
+    </div>
+  </header>
+
+  <section id="hero" class="relative w-full aspect-[16/9] items-center justify-between px-[7vw]">
+    <img src="/main.jpg" alt="doctor in surgery room" class="absolute w-full object-center object-cover aspect-[16/9] top-0 left-0 brightness-75 contrast-125 z-0">
+    <div class="w-[61%] flex-col justify-center gap-2.5 z-10">
+      <h1 class="text-[--f] text-7xl font-extrabold capitalize z-10">make appointments <br>easy and fast</h1>
+      <p class="text-[--w] font-medium text-xl">Telemedicine services available to bridge gaps between doctors and patients.</p>
+    </div>
+    <form action="post" id="book" class="w-[31%] flex-col items-center justify-center gap-2.5 z-10 p-7 rounded-3xl bg-[--w]">
+      <div class="relative z-0 w-full items-end justify-between">
+         <h4 class="text-2xl text-[--d] font-bold capitalize">book free <br>consultation</h4>
+         <img src="/doctors-office.png" alt="doctor in his office" class="w-14">
+      </div>
+      <div class="relative z-0 w-full mb-5 group">
+        <input type="text" name="f_name" id="f_name" class="block py-2.5 px-1.5 w-full text-[--d] bg-transparent border-b-2 border-[--t] appearance-none focus:border-[--d] peer" placeholder=" " required />
+        <label for="f_name" class="peer-focus:font-medium absolute text-[--t] duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-[--d] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Patient's Name</label>
+      </div>
+      <div class="relative z-0 w-full mb-5 group">
+        <input type="tel" name="f_tel" id="f_tel" class="block py-2.5 px-1.5 w-full text-[--d] bg-transparent border-b-2 border-[--t] appearance-none focus:border-[--d] peer" placeholder=" " required />
+        <label for="f_tel" class="peer-focus:font-medium absolute text-[--t] duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-[--d] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Phone Number</label>
+      </div>
+      <div class="relative z-0 w-full mb-5 group">
+        <input type="text" name="f_loc" id="f_loc" class="block py-2.5 px-1.5 w-full text-[--d] bg-transparent border-b-2 border-[--t] appearance-none focus:border-[--d] peer" placeholder=" " required />
+        <label for="f_loc" class="peer-focus:font-medium absolute text-[--t] duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-[--d] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Your Location</label>
+      </div>
+      <div class="relative z-0 w-full mb-5 group">
+        <input type="text" name="f_diag" id="f_diag" class="block py-2.5 px-1.5 w-full text-[--d] bg-transparent border-b-2 border-[--t] appearance-none focus:border-[--d] peer" placeholder=" " required />
+        <label for="f_diag" class="peer-focus:font-medium absolute text-[--t] duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-[--d] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Diagnosis</label>
+      </div>
+      <button type="submit" class="text-[--w] text-center bg-[--b] rounded-xl py-2.5 w-full">Book Consultation</button>
+    </form>
   </section>
 
-  <section id="doctors" class="flex-col items-center gap-12">
+  <section id="diseases" class="flex-col items-center gap-12 z-50">
     <div class="w-full flex-col items-center gap-7">
       <div class="w-full items-end justify-between">
-        <h3 class="text-4xl text-[--d] font-bold capitalize">select a doctor by specialty</h3>
-        <button class="text-[--b] text-xl font-medium flex items-center justify-end gap-2">See All <i class="ph ph-circles-four text-3xl"></i></button>
+        <h3 class="text-4xl text-[--d] font-bold capitalize">Comprehensive Care for Diseases and Surgeries</h3>
+        <button id="viewAll" class="text-[--b] text-xl font-medium flex items-center justify-end gap-2">Show More<i class="ph-fill ph-circles-three-plus text-3xl"></i></button>
       </div>
-      <div class="w-full grid grid-cols-4 gap-3.5">
-        <div class="specialist w-full flex-col justify-between aspect-[4/2.5] p-5 rounded-2xl bg-[--f]">
-          <div class="w-full flex-col gap-0.5">
-            <img src="/cardiologist.png" alt="doctorb" class="w-12">
-            <img src="/cardiologistw.png" alt="doctorw" class="w-12 invisible hidden">
-            <h4 class="text-2xl text-[--b] font-bold">Cardiologists</h4>
-          </div>
-          <p class="text-base text-[--t] leading-[1.1] font-medium">Doctors who deal with heart related issues</p>
+      <div class="w-full grid grid-cols-6 gap-3.5">
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/aids.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Aids Counselling</h4>
         </div>
-        <div class="specialist w-full flex-col justify-between aspect-[4/2.5] p-5 rounded-2xl bg-[--f]">
-          <div class="w-full flex-col gap-0.5">
-            <img src="/pediatrician.png" alt="doctorb" class="w-12">
-            <img src="/pediatricianw.png" alt="doctorw" class="w-12 invisible hidden">
-            <h4 class="text-2xl text-[--b] font-bold">Pediatricians</h4>
-          </div>
-          <p class="text-base text-[--t] leading-[1.1] font-medium">Doctors who deal with children related issues</p>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/anorexia.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Anorexia</h4>
         </div>
-        <div class="specialist w-full flex-col justify-between aspect-[4/2.5] p-5 rounded-2xl bg-[--f]">
-          <div class="w-full flex-col gap-0.5">
-            <img src="/otolaryngologist.png" alt="doctorb" class="w-12">
-            <img src="/otolaryngologistw.png" alt="doctorw" class="w-12 invisible hidden">
-            <h4 class="text-2xl text-[--b] font-bold">Otolaryngologists</h4>
-          </div>
-          <p class="text-base text-[--t] leading-[1.1] font-medium">Doctors who treat ears, nose and the throat.</p>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/blood-test.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Blood Tests</h4>
         </div>
-        <div class="specialist w-full flex-col justify-between aspect-[4/2.5] p-5 rounded-2xl bg-[--f]">
-          <div class="w-full flex-col gap-0.5">
-            <img src="/opthalmologist.png" alt="doctorb" class="w-12">
-            <img src="/opthalmologistw.png" alt="doctorw" class="w-12 invisible hidden">
-            <h4 class="text-2xl text-[--b] font-bold">Opthalmologists</h4>
-          </div>
-          <p class="text-base text-[--t] leading-[1.1] font-medium">These are doctors who treat eyes and vision</p>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/bones.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Bones & Joints</h4>
         </div>
-        <div class="specialist w-full flex-col justify-between aspect-[4/2.5] p-5 rounded-2xl bg-[--f]">
-          <div class="w-full flex-col gap-0.5">
-            <img src="/dermatologist.png" alt="doctorb" class="w-12">
-            <img src="/dermatologistw.png" alt="doctorw" class="w-12 invisible hidden">
-            <h4 class="text-2xl text-[--b] font-bold">Dermatologist</h4>
-          </div>
-          <p class="text-base text-[--t] leading-[1.1] font-medium">Doctor who deals with skin, hair and nails</p>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/breast-cancer.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Breast Cancer</h4>
         </div>
-        <div class="specialist w-full flex-col justify-between aspect-[4/2.5] p-5 rounded-2xl bg-[--f]">
-          <div class="w-full flex-col gap-0.5">
-            <img src="/nephrologist.png" alt="doctorb" class="w-12">
-            <img src="/nephrologistw.png" alt="doctorw" class="w-12 invisible hidden">
-            <h4 class="text-2xl text-[--b] font-bold">Nephrologist</h4>
-          </div>
-          <p class="text-base text-[--t] leading-[1.1] font-medium">Doctor who deals with kidney related issues</p>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/cataract.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Eye Cataracts</h4>
         </div>
-        <div class="specialist w-full flex-col justify-between aspect-[4/2.5] p-5 rounded-2xl bg-[--f]">
-          <div class="w-full flex-col gap-0.5">
-            <img src="/psychiatrist.png" alt="doctorb" class="w-12">
-            <img src="/psychiatristw.png" alt="doctorw" class="w-12 invisible hidden">
-            <h4 class="text-2xl text-[--b] font-bold">Psychiatrist</h4>
-          </div>
-          <p class="text-base text-[--t] leading-[1.1] font-medium">Doctor who deals with mental health issues</p>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/cervix.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Cervical Cancer</h4>
         </div>
-        <div class="specialist w-full flex-col justify-between aspect-[4/2.5] p-5 rounded-2xl bg-[--f]">
-          <div class="w-full flex-col gap-0.5">
-            <img src="/dentist.png" alt="doctorb" class="w-12">
-            <img src="/dentistw.png" alt="doctorw" class="w-12 invisible hidden">
-            <h4 class="text-2xl text-[--b] font-bold">Dentist</h4>
-          </div>
-          <p class="text-base text-[--t] leading-[1.1] font-medium">Doctor who deals with oral health issues</p>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/colon-cancer.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Colon Cancer</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/enamel.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Enamel Restoration</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/epigastric.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Epigastric</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/blood-pressure.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Blood Pressure</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/gastric.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Gastric Disorders</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/geriatrics.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Geriatrics</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/gestational-diabetes.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Obstetrics</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/glucose-meter.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Diabetes Mellitus</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/gynecology.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Gynecological</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/headache.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Headaches</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/heart-disease.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Heart Diseases</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/hemorrhoids.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Hemorrhoids</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/hernia.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Hernia</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/hypertension.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Hypertension</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/icu.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Intensive Care Unit</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/infection.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Dental Cavities</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/injury.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Casualty Care</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/kidney.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Kidney Diseases</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/overweight.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Obesity</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/parkinson.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Parkinson's</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/pediatrics.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Pediatrics</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/pneumonia.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Pneumonia</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/prostate.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Prostate Cancer</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/rash.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Skin Rashes</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/redeyes.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Conjunctivitis</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/robotic-surgery.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Robotic Surgery</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/runny-nose.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Influenza</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/schizophrenia.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Schizophrenia</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/smallpox.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Smallpox</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/spine.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Spine Care</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/std.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">STDs</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/stiching.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Stitching</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/varicose-veins.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Varicose Veins</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/surgery.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Medical Surgeries</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/tests.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Blood Tests</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/tongue.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Oral Ulcers</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/tonsillectomy.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">ENT Services</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/tuberculosis.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Tuberculosis</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/tumor.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Brain Tumors</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/podiatry.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Podiatry</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/urinary-tract-infection.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Urinalysis</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/vascular.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Vascular Screening</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/vision.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Trachoma</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/watery-eye.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Watery Eyes</h4>
+        </div>
+        <div class="diseases w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/x-ray.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">X-ray Services</h4>
         </div>
       </div>
     </div>
+  </section>
+
+  <section id="doctors" class="flex-col items-center gap-12 z-50">
     <div class="w-full flex-col items-center gap-7">
       <div class="w-full items-end justify-between">
-        <h3 class="text-4xl text-[--d] font-bold capitalize">select medical procedure</h3>
-        <button class="text-[--b] text-xl font-medium flex items-center justify-end gap-2">See All <i class="ph ph-circles-four text-3xl"></i></button>
+        <h3 class="text-4xl text-[--d] font-bold capitalize">categories of our team of doctors</h3>
+        <button id="showAll" class="text-[--b] text-xl font-medium flex items-center justify-end gap-3.5">Show More<i class="ph-fill ph-circles-three-plus text-3xl"></i></button>
       </div>
-      <div class="w-full grid grid-cols-3 gap-3.5">
-        <div class="procedure w-full flex-col justify-between aspect-video p-5 rounded-2xl bg-[--f]">
-          <h4 class="text-3xl text-[--b] font-bold capitalize">taking samples</h4>
-          <p class="text-base text-[--t] leading-[1.1] font-medium">This involves collecting samples from the affected area, which could include blood, tissue, urine, or other relevant materials depending on the condition being treated.</p>
-          <button class="text-[--b] text-lg font-semibold flex items-center justify-start gap-3">Learn More<i class="ph ph-arrow-right text-3xl"></i></button>
+      <div class="w-full grid grid-cols-6 gap-3.5">
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/allergist.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">allergist</h4>
         </div>
-        <div class="procedure w-full flex-col justify-between aspect-video p-5 rounded-2xl bg-[--f]">
-          <h4 class="text-3xl text-[--b] font-bold capitalize">diagnostic testing</h4>
-          <p class="text-base text-[--t] leading-[1.1] font-medium">Diagnostic tests like blood tests, imaging scans (e.g. X-rays, CT scans), or biopsies may be conducted to analyze the samples & determine the nature & extent of the condition.</p>
-          <button class="text-[--b] text-lg font-semibold flex items-center justify-start gap-3">Learn More<i class="ph ph-arrow-right text-3xl"></i></button>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/anesthesiologist.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">anesthesiologist</h4>
         </div>
-        <div class="procedure w-full flex-col justify-between aspect-video p-5 rounded-2xl bg-[--f]">
-          <h4 class="text-3xl text-[--b] font-bold capitalize">medication therapy</h4>
-          <p class="text-base text-[--t] leading-[1.1] font-medium">Medications like antibiotics, antivirals, antifungals, pain relievers, or other drugs may be prescribed to manage symptoms, fight infections, or treat underlying causes.</p>
-          <button class="text-[--b] text-lg font-semibold flex items-center justify-start gap-3">Learn More<i class="ph ph-arrow-right text-3xl"></i></button>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/audiologist.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">audiologist</h4>
         </div>
-        <div class="procedure w-full flex-col justify-between aspect-video p-5 rounded-2xl bg-[--f]">
-          <h4 class="text-3xl text-[--b] font-bold capitalize">Surgical Intervention</h4>
-          <p class="text-base text-[--t] leading-[1.1] font-medium">Where medication or other non-invasive treatments are ineffective, surgery may be necessary to remove tumors, repair damaged tissues, correct structural abnormalities, or address other medical issues.</p>
-          <button class="text-[--b] text-lg font-semibold flex items-center justify-start gap-3">Learn More<i class="ph ph-arrow-right text-3xl"></i></button>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/cardiologist.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">cardiologist</h4>
         </div>
-        <div class="procedure w-full flex-col justify-between aspect-video p-5 rounded-2xl bg-[--f]">
-          <h4 class="text-3xl text-[--b] font-bold capitalize">Immunotherapy</h4>
-          <p class="text-base text-[--t] leading-[1.1] font-medium">Immunotherapy works by boosting the body's immune system to help fight cancer or other diseases. It can be used to treat certain types of cancer and autoimmune disorders.</p>
-          <button class="text-[--b] text-lg font-semibold flex items-center justify-start gap-3">Learn More<i class="ph ph-arrow-right text-3xl"></i></button>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/doctor.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Health&nbsp;Consultant</h4>
         </div>
-        <div class="procedure w-full flex-col justify-between aspect-video p-5 rounded-2xl bg-[--f]">
-          <h4 class="text-3xl text-[--b] font-bold capitalize">Psychological Support</h4>
-          <p class="text-base text-[--t] leading-[1.1] font-medium">Counseling, support groups, and other mental health services may be provided to help patients cope with the emotional and psychological aspects of their condition & treatment process.</p>
-          <button class="text-[--b] text-lg font-semibold flex items-center justify-start gap-3">Learn More<i class="ph ph-arrow-right text-3xl"></i></button>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/dentist.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">dentist</h4>
+        </div>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/dermatologist.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">dermatologist</h4>
+        </div>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/gastroenterologist.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">Gastroenterologist</h4>
+        </div>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/geriatrician.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">geriatrician</h4>
+        </div>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/gynecologist.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">gynecologist</h4>
+        </div>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/hospitalist.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">hospitalist</h4>
+        </div>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/nephrologist.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">nephrologist</h4>
+        </div>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/neurologist.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">neurologist</h4>
+        </div>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/nurse.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">nurse</h4>
+        </div>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/nutritionist.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">nutritionist</h4>
+        </div>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/oncologist.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">oncologist</h4>
+        </div>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/opthalmologist.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">opthalmologist</h4>
+        </div>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/orthodontist.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">orthodontist</h4>
+        </div>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/orthopedist.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">orthopedist</h4>
+        </div>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/otolaryngologist.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">otolaryngologist</h4>
+        </div>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/pathologist.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">pathologist</h4>
+        </div>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/pediatrician.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">pediatrician</h4>
+        </div>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/pharmacist.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">pharmacist</h4>
+        </div>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/podiatrist.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">podiatrist</h4>
+        </div>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/psychiatrist.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">psychiatrist</h4>
+        </div>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/pulmonologist.png" alt="doctorb" class="w-[68px]">
+          <h4 class="text-[--b] font-bold">pulmonologist</h4>
+        </div>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/radiologist.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">radiologist</h4>
+        </div>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/rheumatologist.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">rheumatologist</h4>
+        </div>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/surgeon.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">surgeon</h4>
+        </div>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/therapist.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">therapist</h4>
+        </div>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/urologistm.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">urologist <i class="ph-bold ph-gender-male"></i></h4>
+        </div>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/urologist.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">urologist <i class="ph-bold ph-gender-female"></i></h4>
+        </div>
+        <div class="specialist w-full flex-col justify-center items-center gap-3.5 aspect-square p-5 rounded-2xl bg-[--f]">
+          <img src="/veterinarian.png" alt="doctorb" class="w-16">
+          <h4 class="text-[--b] font-bold">veterinarian</h4>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="treatment" class="flex-col items-center justify-center gap-9">
+  <swiper-container class="w-full items-center justify-center gap-2.5 px-[--x] py-[--y] z-50" navigation="false" pagination="true" slides-per-view="3" grid-cols="5" space-between="15" autoplay="true" loop="true" mousewheel-force-to-axis="true">
+    <swiper-slide class="w-full aspect-[4/2.75] rounded-[29px] flex flex-col justify-between p-5 bg-[--f] border border-[#7d838933]">
+      <div class="w-full items-end gap-3.5">
+        <span class="w-[52px] flex items-center justify-center aspect-square rounded-full text-2xl text-[--w] text-center font-extrabold bg-[--l] tracking-widest">AT</span>
+        <div class="w-fit justify-between flex-col gap-1.5">
+          <h6 class="text-base text-[--d] font-semibold">Ahmad&nbsp;Tusingwire</h6>
+          <div class="w-fit gap-1 text-yellow-600 text-base">
+            <i class="ph-fill ph-star"></i>
+            <i class="ph-fill ph-star"></i>
+            <i class="ph-fill ph-star"></i>
+            <i class="ph-fill ph-star"></i>
+            <i class="ph-fill ph-star"></i>
+          </div>
+        </div>
+        <p class="w-fit flex items-center gap-1 text-sm text-[--d] font-medium"><i class="ph-fill ph-thumbs-up text-xl text-[--b]"></i>Recommends</p>
+      </div>
+      <p class="text-[--d] pl-1.5 font-medium">I appreciate the easy access and efficient communication with healthcare providers through your telemedicine service.</p>
+      <div class="w-full pt-2 px-1.5 text-lg text-[--d] font-bold border-t border-[#7d838965]">
+        City:&nbsp;<span class="opacity-35">Bushenyi</span>
+      </div>
+    </swiper-slide>
+    <swiper-slide class="w-full aspect-[4/2.75] rounded-[29px] flex flex-col justify-between p-5 bg-[--f] border border-[#7d838933]">
+      <div class="w-full items-end gap-3.5">
+        <span class="w-[52px] flex items-center justify-center aspect-square rounded-full text-2xl text-[--w] text-center font-extrabold bg-[--l] tracking-widest">DA</span>
+        <div class="w-fit justify-between flex-col gap-1.5">
+          <h6 class="text-base text-[--d] font-semibold">Danyal Al-Hazm</h6>
+          <div class="w-fit gap-1 text-yellow-600 text-base">
+            <i class="ph-fill ph-star"></i>
+            <i class="ph-fill ph-star"></i>
+            <i class="ph-fill ph-star"></i>
+            <i class="ph-fill ph-star"></i>
+            <i class="ph-fill ph-star-half"></i>
+          </div>
+        </div>
+        <p class="w-fit flex items-center gap-1 text-sm text-[--d] font-medium ml-1.5"><i class="ph-fill ph-thumbs-up text-xl text-[--b]"></i>Recommends</p>
+      </div>
+      <p class="text-[--d] pl-1.5 font-medium">Your telemedicine platform has transformed how I receive care, offering comfort and expert consultations without leaving home.</p>
+      <div class="w-full pt-2 px-1.5 text-lg text-[--d] font-bold border-t border-[#7d838965]">
+        City:&nbsp;<span class="opacity-35">Kampala</span>
+      </div>
+    </swiper-slide>
+    <swiper-slide class="w-full aspect-[4/2.75] rounded-[29px] flex flex-col justify-between p-5 bg-[--f] border border-[#7d838933]">
+      <div class="w-full items-end gap-3.5">
+        <span class="w-[52px] flex items-center justify-center aspect-square rounded-full text-2xl text-[--w] text-center font-extrabold bg-[--l] tracking-widest">AY</span>
+        <div class="w-fit justify-between flex-col gap-1.5">
+          <h6 class="text-base text-[--d] font-semibold">Abū Yahya Aslam</h6>
+          <div class="w-fit gap-1 text-yellow-600 text-base">
+            <i class="ph-fill ph-star"></i>
+            <i class="ph-fill ph-star"></i>
+            <i class="ph-fill ph-star"></i>
+            <i class="ph-fill ph-star"></i>
+            <i class="ph-fill ph-star-half"></i>
+          </div>
+        </div>
+        <p class="w-fit flex items-center gap-1 text-sm text-[--d] font-medium ml-1.5"><i class="ph-fill ph-thumbs-up text-xl text-[--b]"></i>Recommends</p>
+      </div>
+      <p class="text-[--d] pl-1.5 font-medium">Thank you for the reliable and prompt telemedicine connections, making healthcare accessible and straightforward.</p>
+      <div class="w-full pt-2 px-1.5 text-lg text-[--d] font-bold border-t border-[#7d838965]">
+        City:&nbsp;<span class="opacity-35">Kamuli</span>
+      </div>
+    </swiper-slide>
+    <swiper-slide class="w-full aspect-[4/2.75] rounded-[29px] flex flex-col justify-between p-5 bg-[--f] border border-[#7d838933]">
+      <div class="w-full items-end gap-3.5">
+        <span class="w-[52px] flex items-center justify-center aspect-square rounded-full text-2xl text-[--w] text-center font-extrabold bg-[--l] tracking-widest">ZM</span>
+        <div class="w-fit justify-between flex-col gap-1.5">
+          <h6 class="text-base text-[--d] font-semibold">Zainab&nbsp;Maymūnah</h6>
+          <div class="w-fit gap-1 text-yellow-600 text-base">
+            <i class="ph-fill ph-star"></i>
+            <i class="ph-fill ph-star"></i>
+            <i class="ph-fill ph-star"></i>
+            <i class="ph-fill ph-star"></i>
+            <i class="ph-fill ph-star"></i>
+          </div>
+        </div>
+        <p class="w-fit flex items-center gap-1 text-sm text-[--d] font-medium"><i class="ph-fill ph-thumbs-up text-xl text-[--b]"></i>Recommends</p>
+      </div>
+      <p class="text-[--d] pl-1.5 font-medium">The convenience and quality of care provided by your telemedicine services are truly outstanding.</p>
+      <div class="w-full pt-2 px-1.5 text-lg text-[--d] font-bold border-t border-[#7d838965]">
+        City:&nbsp;<span class="opacity-35">Mbarara</span>
+      </div>
+    </swiper-slide>
+    <swiper-slide class="w-full aspect-[4/2.75] rounded-[29px] flex flex-col justify-between p-5 bg-[--f] border border-[#7d838933]">
+      <div class="w-full items-end gap-3.5">
+        <span class="w-[52px] flex items-center justify-center aspect-square rounded-full text-2xl text-[--w] text-center font-extrabold bg-[--l] tracking-widest">YO</span>
+        <div class="w-fit justify-between flex-col gap-1.5">
+          <h6 class="text-base text-[--d] font-semibold">Ya'qūb Opolot</h6>
+          <div class="w-fit gap-1 text-yellow-600 text-base">
+            <i class="ph-fill ph-star"></i>
+            <i class="ph-fill ph-star"></i>
+            <i class="ph-fill ph-star"></i>
+            <i class="ph-fill ph-star"></i>
+            <i class="ph-fill ph-star-half"></i>
+          </div>
+        </div>
+        <p class="w-fit flex items-center gap-1 text-sm text-[--d] font-medium ml-1.5"><i class="ph-fill ph-thumbs-up text-xl text-[--b]"></i>Recommends</p>
+      </div>
+      <p class="text-[--d] pl-1.5 font-medium">Your dedication to connecting patients with doctors seamlessly via telemedicine is greatly appreciated.</p>
+      <div class="w-full pt-2 px-1.5 text-lg text-[--d] font-bold border-t border-[#7d838965]">
+        City:&nbsp;<span class="opacity-35">Kotido</span>
+      </div>
+    </swiper-slide>
+  </swiper-container>
+
+  <section id="faqs" class="flex-col items-center justify-center gap-9 z-50">
     <div class="w-3/5 flex-col items-center justify-center gap-1.5">
       <h3 class="text-4xl text-[--d] text-center font-bold capitalize">frequently asked questions</h3>
       <p class="text-[--t] text-lg text-center font-medium">Here are some of the frequently asked questions regarding healthcare.</p>
@@ -245,32 +614,69 @@
     </div>
   </section>
 
-  <section id="appointments" class="w-full aspect-video grid grid-cols-2 gap-14">
-    <div class="w-full aspect-square bg-[url('/doctor.jpg')] bg-center bg-cover rounded-xl"></div>
-    <div class="w-full aspect-square flex-col justify-between py-7 pr-3">
-      <h2 class="text-[--d] text-6xl font-bold capitalize">make an <br>appointment</h2>
-      <p class="text-xl text-[--t] font-semibold">Enter your contact details in the form below and schedule an appointment with one of our specialists.</p>
-      <form action="" method="get" accept-charset="utf-8" class="w-full flex-wrap gap-5 px-9 pl-3.5">
-        <input id="name" type="text" class="block text-[--t] text-lg font-medium px-7 py-3 outline outline-2 outline-[--t] placeholder:text-[--t] placeholder:opacity-65 rounded w-full capitalize" placeholder="Enter your name" required>
-        <input id="email" type="email" class="block text-[--t] text-lg font-medium px-7 py-3 outline outline-2 outline-[--t] placeholder:text-[--t] placeholder:opacity-65 rounded w-full" placeholder="Enter your email" required>
-        <div class="w-full items-center justify-between gap-5">
-          <input id="phone" type="tel" class="block text-[--t] text-lg font-medium px-7 py-3 outline outline-2 outline-[--t] placeholder:text-[--t] placeholder:opacity-65 rounded w-full" placeholder="Phone Number" required>
-          <select id="app" type="text" class="block text-[--t] text-lg bg-[--w] font-medium px-7 py-3 outline outline-2 outline-[--t] rounded" required>
-            <option value="select app" disabled selected>Choose Mobile App</option>
-            <option value="Doxy.me">Doxy.me</option>
-            <option value="Zoom">Zoom</option>
-            <option value="Microsoft Teams">Microsoft Teams</option>
-          </select>
+  <section id="choice" class="w-full flex-col items-center gap-12 z-50">
+    <div class="w-full flex-col items-center gap-3.5">
+      <h2 class="text-4xl text-[--d] text-center font-bold capitalize">Why choose TeleMedi?</h2>
+      <p class="text-lg text-[--t] text-center font-medium">The following features make TeleMedi a pivotal healthcare provider in Uganda, especially suited to meet the unique medical needs of its population through both digital and local hospital-based solutions.</p>
+    </div>
+
+    <div class="w-full grid grid-cols-3 gap-5">
+      <div class="w-full aspect-[4/3] flex-col justify-between px-9 py-5 rounded-3xl bg-[--f]">
+        <h3 class="text-6xl text-[--l] font-extrabold">01.</h3>
+        <h5 class="text-xl text-[--d] font-bold capitalize">comprehensive local network</h5>
+        <p class="text-base text-[--t] font-medium">TeleMedi collaborates with a vast network of local hospitals and clinics across Uganda, ensuring accessible, seamless transitions from virtual to in-person care when necessary.</p>
+      </div>
+      <div class="w-full aspect-[4/3] flex-col justify-between px-9 py-5 rounded-3xl bg-[--f]">
+        <h3 class="text-6xl text-[--l] font-extrabold">02.</h3>
+        <h5 class="text-xl text-[--d] font-bold capitalize">specialists in tropical diseases</h5>
+        <p class="text-base text-[--t] font-medium">TeleMedi specializes in treating over 45 common tropical diseases like malaria and cholera, providing expert, region-specific care and effective treatments tailored to Ugandan climates.</p>
+      </div>
+      <div class="w-full aspect-[4/3] flex-col justify-between px-9 py-5 rounded-3xl bg-[--f]">
+        <h3 class="text-6xl text-[--l] font-extrabold">03.</h3>
+        <h5 class="text-xl text-[--d] font-bold capitalize">innovative Telemedicine technology</h5>
+        <p class="text-base text-[--t] font-medium">TeleMedi uses advanced telemedicine technology to break geographical barriers, enabling patients in Uganda's remote areas to conveniently access top healthcare professionals from home.</p>
+      </div>
+      <div class="w-full aspect-[4/3] flex-col justify-between px-9 py-5 rounded-3xl bg-[--f]">
+        <h3 class="text-6xl text-[--l] font-extrabold">04.</h3>
+        <h5 class="text-xl text-[--d] font-bold capitalize">integrated care for advanced treatments</h5>
+        <p class="text-base text-[--t] font-medium">TeleMedi offers comprehensive services from virtual consultations to surgical care, coordinating with local hospitals to ensure smooth pre-surgical and post-surgical transitions and patient support.</p>
+      </div>
+      <div class="w-full aspect-[4/3] flex-col justify-between px-9 py-5 rounded-3xl bg-[--f]">
+        <h3 class="text-6xl text-[--l] font-extrabold">05.</h3>
+        <h5 class="text-xl text-[--d] font-bold capitalize">affordability and accessibility</h5>
+        <p class="text-base text-[--t] font-medium">TeleMedi reduces the need for costly travel for medical consultations, making healthcare more affordable and accessible, especially in remote areas, thus encouraging regular check-ups and timely treatment.</p>
+      </div>
+    </div>
+
+    <div class="relative w-full aspect-[4/1.5] items-center justify-center px-[--x] py-12 bg-[#001338] overflow-hidden border-2 border-[#001338] rounded-xl">
+      <div class="absolute h-full aspect-[3.5/4] -top-[1px] left-0 bg-[url('/techs.jpg')] bg-cover bg-center">
+        <div class="container">
+          <div class="center ph-fill ph-first-aid"></div>
+          <div class="circle" style="--i:0;"><i class="ph-fill ph-syringe"></i></div>
+          <div class="circle" style="--i:1;"><i class="ph-fill ph-virus"></i></div>
+          <div class="circle" style="--i:2;"><i class="ph-fill ph-tooth"></i></div>
+          <div class="circle" style="--i:3;"><i class="ph-fill ph-stethoscope"></i></div>
+          <div class="circle" style="--i:4;"><i class="ph-fill ph-ambulance"></i></div>
+          <div class="circle" style="--i:5;"><i class="ph-fill ph-pill"></i></div>
+          <div class="circle" style="--i:6;"><i class="ph-fill ph-microscope"></i></div>
+          <div class="circle" style="--i:7;"><i class="ph-fill ph-hospital"></i></div>
+          <div class="circle" style="--i:8;"><i class="ph-fill ph-first-aid-kit"></i></div>
+          <div class="circle" style="--i:9;"><i class="ph-fill ph-face-mask"></i></div>
+          <div class="circle" style="--i:10;"><i class="ph-fill ph-dna"></i></div>
+          <div class="circle" style="--i:11;"><i class="ph-fill ph-heartbeat"></i></div>
         </div>
-        <div class="w-full items-center justify-between gap-5">
-          <input id="diagnosis" type="text" class="block text-[--t] text-lg font-medium px-7 py-3 outline outline-2 outline-[--t] placeholder:text-[--t] placeholder:opacity-65 rounded w-full capitalize" placeholder="Body Part/ Problem" required>
-          <button type="submit" class="w-fit text-[--w] text-lg py-3 px-9 rounded font-medium bg-[--b] outline outline-2 outline-[--b] capitalize">submit&nbsp;details</button>
-        </div>
-      </form>
+      </div>
+      <div class="w-2/5 h-full flex-col items-center justify-between gap-3 ml-[100px]">
+        <h3 class="text-3xl text-[--w] text-center font-bold capitalize">create your <span class="text-[--l] font-black">tHIS</span> Identity</h3>
+        <p class="text-lg text-[--f] font-medium text-center opacity-75">TeleMedi Health Identity System (THIS) is a means of storing patients' records to enable accessing them remotely anywhere.</p>
+        <img src="/patients.png" alt="patient's records" class="w-16">
+        <button id="registerId" class="text-lg text-[--w] px-28 py-3 rounded-lg bg-[--b] focus:opacity-85">Create Your THIS ID</button>
+      </div>
+      <div class="absolute h-full aspect-[2.5/4] -top-[1px] right-0 bg-[url('/medic.jpg')] bg-cover bg-center"></div>
     </div>
   </section>
 
-  <section id="blogs" class="flex-col items-center gap-9">
+  <section id="blogs" class="flex-col items-center gap-9 z-50">
     <div class="w-full items-end justify-between">
       <h3 class="text-4xl text-[--d] font-bold capitalize">recommend articles for you</h3>
       <button class="text-[--b] text-xl font-medium flex items-center justify-end gap-2">See All <i class="ph ph-circles-four text-3xl"></i></button>
@@ -280,7 +686,7 @@
         <img src="/blood.jpg" alt="article telemedicine image" class="h-52 aspect-square object-cover object-center rounded-2xl">
         <div class="w-full h-full flex-col justify-between py-1.5">
           <span class="text-[--t] font-medium capitalize">healthcare | 24th Jan 2024</span>
-          <h5 class="text-[--d] text-2xl font-bold">The Importance of Preventive Care: How Regular Check-ups Can Save Lives</h5>
+          <h5 class="text-[--d] text-2xl font-bold">Preventive Care & It's Importances: How Regular Check-ups Can Save Lives</h5>
           <button class="text-[--b] text-lg font-medium flex items-center gap-2">Read More<i class="ph ph-arrow-right text-2xl"></i></button>
         </div>
       </article>
@@ -293,7 +699,7 @@
         </div>
       </article>
       <article class="w-full items-center gap-5">
-        <img src="/hero.jpg" alt="article telemedicine image" class="h-52 aspect-square object-cover object-center rounded-2xl">
+        <img src="/microscope.jpg" alt="article telemedicine image" class="h-52 aspect-square object-cover object-center rounded-2xl">
         <div class="w-full h-full flex-col justify-between py-1.5">
           <span class="text-[--t] font-medium capitalize">Doctors & Nurses | 03rd March 2021</span>
           <h5 class="text-[--d] text-2xl font-bold">A Day in the Life of a Nurse: Behind the Scenes at Our Hospital</h5>
@@ -301,7 +707,7 @@
         </div>
       </article>
       <article class="w-full items-center gap-5">
-        <img src="/microscope.jpg" alt="article telemedicine image" class="h-52 aspect-square object-cover object-center rounded-2xl">
+        <img src="/home.jpg" alt="article telemedicine image" class="h-52 aspect-square object-cover object-center rounded-2xl">
         <div class="w-full h-full flex-col justify-between py-1.5">
           <span class="text-[--t] font-medium capitalize">medical Research | 17th July 2022</span>
           <h5 class="text-[--d] text-2xl font-bold">The Future of Healthcare: Trends and Predictions for the Next Decade</h5>
@@ -309,15 +715,15 @@
         </div>
       </article>
       <article class="w-full items-center gap-5">
-        <img src="/waiting.jpg" alt="article telemedicine image" class="h-52 aspect-square object-cover object-center rounded-2xl">
+        <img src="/chiropractor.jpg" alt="article telemedicine image" class="h-52 aspect-square object-cover object-center rounded-2xl">
         <div class="w-full h-full flex-col justify-between py-1.5">
           <span class="text-[--t] font-medium capitalize">Treatments | 27th November 2020</span>
-          <h5 class="text-[--d] text-2xl font-bold">Patient Success Stories: Inspiring Tales of Healing and Recovery</h5>
+          <h5 class="text-[--d] text-2xl font-bold">Patient Success Stories: Inspiring Tales of Treatment and Recovery</h5>
           <button class="text-[--b] text-lg font-medium flex items-center gap-2">Read More<i class="ph ph-arrow-right text-2xl"></i></button>
         </div>
       </article>
       <article class="w-full items-center gap-5">
-        <img src="/home.jpg" alt="article telemedicine image" class="h-52 aspect-square object-cover object-center rounded-2xl">
+        <img src="/doc.jpg" alt="article telemedicine image" class="h-52 aspect-square object-cover object-[left_center] rounded-2xl">
         <div class="w-full h-full flex-col justify-between py-1.5">
           <span class="text-[--t] font-medium capitalize">Telemedicine | 09th February 2021</span>
           <h5 class="text-[--d] text-2xl font-bold">Embracing Telemedicine: Revolutionizing Healthcare Delivery</h5>
@@ -327,9 +733,9 @@
     </div>
   </section>
 
-  <footer class="w-full justify-between bg-[--d]">
+  <footer class="w-full justify-between bg-[--d] z-50">
     <div class="w-1/3 flex-col justify-between gap-9">
-      <div id="title" class="w-fit items-center gap-1.5">
+      <div class="w-fit items-center gap-1.5 title">
         <img src="/logo.png" alt="Medicex logo" class="w-9">
         <h3 class="text-3xl text-[--w] font-extrabold">TeleMedi</h3>
       </div>
@@ -391,11 +797,11 @@
       </div>
     </div>
   </footer>
-  <!--
-    <a href="https://www.flaticon.com/free-icons/mri" title="mri icons">Mri icons created by B.Genesis - Flaticon</a>
-  -->
 
   <!-- my javascript code-->
   <script src="main.js"></script>
+
+  <!-- CDN link to swiperjs -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
 </body>
 </html>

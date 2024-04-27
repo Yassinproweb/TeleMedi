@@ -1,14 +1,14 @@
 :root {
   /* colors for text and backgrounds */
   --w: #fefeff;
-  --f: #f5f5f9;
+  --f: #f9f9fb;
   --d: #1a1b23;
   --t: #7d8389;
-  --l: #98CCFF;
+  --l: #BDDEFF;
   --b: #387CFF;
   
   /* padding values */
-  --x: 3.5vw;
+  --x: 5vw;
   --y: 3.5rem;
 }
 
@@ -26,11 +26,11 @@ html {
 
 body {
   background: var(--w);
-  font-family: "Open Sans";
+  font-family: "Nunito Sans";
 }
 
 h1, h2, h3, h4, h5, h6,
-.label {
+label {
   font-family: "Mulish";
 }
 
@@ -49,6 +49,7 @@ section, footer {
 
 section {
   padding-top: 85px;
+  background-color: var(--w);
 }
 
 img {
@@ -71,69 +72,77 @@ li {
   box-shadow: 2px 3px 9px -3px #1a1b2337;
 }
 
+.title img {
+  filter: brightness(0) invert(1);
+}
+
 .scroll h3 {
-  color: var(--d);
+  color: var(--b);
 }
 
-.scroll nav a {
-  color: var(--t);
+.scroll .title img {
+  filter: none;
 }
 
-.scroll button:nth-of-type(1) {
-  background: var(--d);
-  color: var(--f);
+.scroll #titles {
+  color: var(--b);
 }
-
-nav a {
-  font-weight: 400;
-  color: var(--w);
-}
-
-nav a:hover {
-  color: var(--l);
-}
-
 
 /* hero section */
 h1 {
-  text-shadow: 2px 3px 5px var(--t);
+  text-shadow: 2px 3px 5px var(--d);
 }
 
 
 /* doctors section */
+.specialist,
+.diseases {
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.specialist.show,
+.diseases.show {
+  display: flex;
+  visibility: visible;
+  opacity: 1;
+}
+
+.specialist:nth-child(-n+12),
+.diseases:nth-child(-n+17) {
+  display: flex;
+  visibility: visible;
+  opacity: 1;
+}
+
 .specialist h4,
-.procedure h4,
-.specialist p,
-.procedure p {
+.diseases h4 {
   pointer-events: none;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+.specialist h4,
+.diseases h4 {
+  font-size: 19px;
 }
 
 .specialist:hover,
-.procedure:hover {
+.diseases:hover {
   background: var(--b);
 }
 
-.specialist:hover [alt="doctorb"] {
-  visibility: hidden;
-  display: none;
-}
-
-.specialist:hover [alt="doctorw"] {
-  visibility: visible;
-  display: block;
+.specialist:hover [alt="doctorb"],
+.diseases:hover [alt="doctorb"],
+[alt="patient's records"] {
+  filter: brightness(0) invert(1);
 }
 
 .specialist:hover h4,
-.procedure:hover h4,
-.specialist:hover p,
-.procedure:hover p,
-.procedure:hover button {
+.diseases:hover h4,
+.diseases:hover button {
   color: var(--w);
-}
-
-.specialist:hover p,
-.procedure:hover p {
-  opacity: 0.75;
 }
 
 
@@ -142,6 +151,53 @@ input[type="radio"]:checked + .label + .arcontent {
   max-height: 300px;
   display: block;
 }
+
+
+/* choice section */
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75px;
+    height: 75px;
+    color: var(--w);
+    font-size: 55px;
+    border: 5px solid var(--w);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle {
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 55px;
+    border: 3px solid var(--w);
+    border-radius: 50%;
+    color: var(--w);
+    font-size: 35px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(calc(var(--i) * 30deg)) translate(135px);
+    transform-origin: center;
+}
+
+.circle i {
+    display: block;
+    transform: rotate(calc(var(--i) * -30deg));
+    transform-origin: center;
+}
+
 
 
 /* footer */
