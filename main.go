@@ -17,7 +17,7 @@ func main() {
 	defer data.DB.Close()
 
 	app := fiber.New(fiber.Config{
-		Views: html.New("./templates", ".html"),
+		Views: html.New("./views", ".html"),
 	})
 
 	store := session.New(session.Config{
@@ -42,6 +42,10 @@ func main() {
 	}
 
 	// Routes
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.Render("index", nil)
+	})
+
 	app.Get("/signup", func(c *fiber.Ctx) error {
 		return c.Render("signup", nil)
 	})
