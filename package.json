@@ -1,0 +1,19 @@
+{
+  "name": "TeleMedi",
+  "version": "1.0.0",
+  "description": "A telemedicine company website",
+  "main": "main.js",
+  "scripts": {
+    "w": "tailwindcss -i ./style.css -o ./dist/style.css --watch",
+    "b": "tailwindcss -i ./style.css -o ./dist/style.css --build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.13.1",
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "3"
+  }
+}

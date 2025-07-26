@@ -6,7 +6,7 @@
   --t: #7d8389;
   --l: #98CCFF;
   --b: #387CFF;
-  
+
   /* padding values */
   --x: 3.5vw;
   --y: 3.5rem;
@@ -29,21 +29,36 @@ body {
   font-family: "Open Sans";
 }
 
-h1, h2, h3, h4, h5, h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 .label {
   font-family: "Mulish";
 }
 
-div, section, footer, form, ul, nav, header, article {
+div,
+section,
+footer,
+form,
+ul,
+nav,
+header,
+article {
   display: flex;
 }
 
-section, header, footer {
+section,
+header,
+footer {
   width: 100%;
   padding: var(--x);
 }
 
-section, footer {
+section,
+footer {
   padding-block: var(--y);
 }
 
@@ -55,7 +70,9 @@ img {
   pointer-events: none;
 }
 
-input, select, button {
+input,
+select,
+button {
   outline: none;
   appearance: none;
 }
@@ -138,7 +155,7 @@ h1 {
 
 
 /* treatment section*/
-input[type="radio"]:checked + .label + .arcontent {
+input[type="radio"]:checked+.label+.arcontent {
   max-height: 300px;
   display: block;
 }
