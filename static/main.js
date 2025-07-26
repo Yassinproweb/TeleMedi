@@ -10,7 +10,7 @@ window.onscroll = function() {
 
 
 // code for search bar filter using JSON data.
-fetch('search.json')
+fetch('./search.json')
   .then(response => response.json())
   .then(data => {
     const dataList = document.getElementById('searchList');

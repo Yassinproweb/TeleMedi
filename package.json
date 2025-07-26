@@ -4,8 +4,8 @@
   "description": "A telemedicine company website",
   "main": "main.js",
   "scripts": {
-    "w": "tailwindcss -i ./style.css -o ./dist/style.css --watch",
-    "b": "tailwindcss -i ./style.css -o ./dist/style.css --build"
+    "-w": "tailwindcss -i ./static/style.css -o ./static/dist/style.css --watch",
+    "-b": "tailwindcss -i ./static/style.css -o ./static/dist/style.css --build"
   },
   "keywords": [],
   "author": "",

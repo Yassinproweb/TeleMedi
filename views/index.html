@@ -1,0 +1,369 @@
+{{ template "partials/heading" .}}
+
+<section id="hero" class="relative w-full aspect-[16/9 flex-col items-center justify-center gap-7">
+  <img src="../static/imgs/pngs/beds.jpg" alt="doctor in surgery room"
+    class="absolute w-full object-center object-cover aspect-[16/9 top-0 left-0 brightness-[61% contrast-[120%]">
+  <div class="w-3/4 flex-col items-center justify-center gap-2.5 z-10">
+    <h1 class="text-f text-6xl text-center font-extrabold capitalize z-10">make appointments easy and fast</h1>
+    <p class="text-w font-medium text-xl">Telemedicine services available to bridge gaps between doctors and
+      patients.</p>
+  </div>
+  <div class="w-3/5 items-center justify-center gap-5 z-10">
+    <label for="search" class="text-w text-lg font-medium bg-b rounded-lg px-7 py-3">Search:</label>
+    <input type="search" id="search" list="searchList" name="search"
+      class="w-full py-3 px-9 rounded-lg bg-w text-lg text-t placeholder:text-t placeholder:opacity-50"
+      placeholder="Search for doctors and their respective specialities">
+
+    <datalist id="searchList" class="opacity-0">
+      <!-- Options will be populated dynamically from the JSON file -->
+    </datalist>
+  </div>
+</section>
+
+<section id="doctors" class="flex-col items-center gap-12">
+  <div class="w-full flex-col items-center gap-7">
+    <div class="w-full items-end justify-between">
+      <h3 class="text-4xl text-d font-bold capitalize">select a doctor by specialty</h3>
+      <button class="text-b text-xl font-medium flex items-center justify-end gap-2">See All <i
+          class="ph ph-circles-four text-3xl"></i></button>
+    </div>
+    <div class="w-full grid grid-cols-4 gap-3.5">
+      <div class="specialist w-full flex-col justify-between aspect-[4/2.5 p-5 rounded-2xl bg-f">
+        <div class="w-full flex-col gap-0.5">
+          <img src="../static/imgs/pngs/cardiologist.png" alt="doctorb" class="w-12">
+          <img src="../static/imgs/pngs/cardiologistw.png" alt="doctorw" class="w-12 invisible hidden">
+          <h4 class="text-2xl text-b font-bold">Cardiologists</h4>
+        </div>
+        <p class="text-base text-t leading-[1.1 font-medium">Doctors who deal with heart related issues</p>
+      </div>
+      <div class="specialist w-full flex-col justify-between aspect-[4/2.5 p-5 rounded-2xl bg-f">
+        <div class="w-full flex-col gap-0.5">
+          <img src="../static/imgs/pngs/pediatrician.png" alt="doctorb" class="w-12">
+          <img src="../static/imgs/pngs/pediatricianw.png" alt="doctorw" class="w-12 invisible hidden">
+          <h4 class="text-2xl text-b font-bold">Pediatricians</h4>
+        </div>
+        <p class="text-base text-t leading-[1.1 font-medium">Doctors who deal with children related issues</p>
+      </div>
+      <div class="specialist w-full flex-col justify-between aspect-[4/2.5 p-5 rounded-2xl bg-f">
+        <div class="w-full flex-col gap-0.5">
+          <img src="../static/imgs/pngs/otolaryngologist.png" alt="doctorb" class="w-12">
+          <img src="../static/imgs/pngs/otolaryngologistw.png" alt="doctorw" class="w-12 invisible hidden">
+          <h4 class="text-2xl text-b font-bold">Otolaryngologists</h4>
+        </div>
+        <p class="text-base text-t leading-[1.1 font-medium">Doctors who treat ears, nose and the throat.</p>
+      </div>
+      <div class="specialist w-full flex-col justify-between aspect-[4/2.5 p-5 rounded-2xl bg-f">
+        <div class="w-full flex-col gap-0.5">
+          <img src="../static/imgs/pngs/opthalmologist.png" alt="doctorb" class="w-12">
+          <img src="../static/imgs/pngs/opthalmologistw.png" alt="doctorw" class="w-12 invisible hidden">
+          <h4 class="text-2xl text-b font-bold">Opthalmologists</h4>
+        </div>
+        <p class="text-base text-t leading-[1.1 font-medium">These are doctors who treat eyes and vision</p>
+      </div>
+      <div class="specialist w-full flex-col justify-between aspect-[4/2.5 p-5 rounded-2xl bg-f">
+        <div class="w-full flex-col gap-0.5">
+          <img src="../static/imgs/pngs/dermatologist.png" alt="doctorb" class="w-12">
+          <img src="../static/imgs/pngs/dermatologistw.png" alt="doctorw" class="w-12 invisible hidden">
+          <h4 class="text-2xl text-b font-bold">Dermatologist</h4>
+        </div>
+        <p class="text-base text-t leading-[1.1 font-medium">Doctor who deals with skin, hair and nails</p>
+      </div>
+      <div class="specialist w-full flex-col justify-between aspect-[4/2.5 p-5 rounded-2xl bg-f">
+        <div class="w-full flex-col gap-0.5">
+          <img src="../static/imgs/pngs/nephrologist.png" alt="doctorb" class="w-12">
+          <img src="../static/imgs/pngs/nephrologistw.png" alt="doctorw" class="w-12 invisible hidden">
+          <h4 class="text-2xl text-b font-bold">Nephrologist</h4>
+        </div>
+        <p class="text-base text-t leading-[1.1 font-medium">Doctor who deals with kidney related issues</p>
+      </div>
+      <div class="specialist w-full flex-col justify-between aspect-[4/2.5 p-5 rounded-2xl bg-f">
+        <div class="w-full flex-col gap-0.5">
+          <img src="../static/imgs/pngs/psychiatrist.png" alt="doctorb" class="w-12">
+          <img src="../static/imgs/pngs/psychiatristw.png" alt="doctorw" class="w-12 invisible hidden">
+          <h4 class="text-2xl text-b font-bold">Psychiatrist</h4>
+        </div>
+        <p class="text-base text-t leading-[1.1 font-medium">Doctor who deals with mental health issues</p>
+      </div>
+      <div class="specialist w-full flex-col justify-between aspect-[4/2.5 p-5 rounded-2xl bg-f">
+        <div class="w-full flex-col gap-0.5">
+          <img src="../static/imgs/pngs/dentist.png" alt="doctorb" class="w-12">
+          <img src="../static/imgs/pngs/dentistw.png" alt="doctorw" class="w-12 invisible hidden">
+          <h4 class="text-2xl text-b font-bold">Dentist</h4>
+        </div>
+        <p class="text-base text-t leading-[1.1 font-medium">Doctor who deals with oral health issues</p>
+      </div>
+    </div>
+  </div>
+  <div class="w-full flex-col items-center gap-7">
+    <div class="w-full items-end justify-between">
+      <h3 class="text-4xl text-d font-bold capitalize">select medical procedure</h3>
+      <button class="text-b text-xl font-medium flex items-center justify-end gap-2">See All <i
+          class="ph ph-circles-four text-3xl"></i></button>
+    </div>
+    <div class="w-full grid grid-cols-3 gap-3.5">
+      <div class="procedure w-full flex-col justify-between aspect-video p-5 rounded-2xl bg-f">
+        <h4 class="text-3xl text-b font-bold capitalize">taking samples</h4>
+        <p class="text-base text-t leading-[1.1 font-medium">This involves collecting samples from the affected
+          area, which could include blood, tissue, urine, or other relevant materials depending on the condition being
+          treated.</p>
+        <button class="text-b text-lg font-semibold flex items-center justify-start gap-3">Learn More<i
+            class="ph ph-arrow-right text-3xl"></i></button>
+      </div>
+      <div class="procedure w-full flex-col justify-between aspect-video p-5 rounded-2xl bg-f">
+        <h4 class="text-3xl text-b font-bold capitalize">diagnostic testing</h4>
+        <p class="text-base text-t leading-[1.1 font-medium">Diagnostic tests like blood tests, imaging scans
+          (e.g. X-rays, CT scans), or biopsies may be conducted to analyze the samples & determine the nature & extent
+          of the condition.</p>
+        <button class="text-b text-lg font-semibold flex items-center justify-start gap-3">Learn More<i
+            class="ph ph-arrow-right text-3xl"></i></button>
+      </div>
+      <div class="procedure w-full flex-col justify-between aspect-video p-5 rounded-2xl bg-f">
+        <h4 class="text-3xl text-b font-bold capitalize">medication therapy</h4>
+        <p class="text-base text-t leading-[1.1 font-medium">Medications like antibiotics, antivirals,
+          antifungals, pain relievers, or other drugs may be prescribed to manage symptoms, fight infections, or treat
+          underlying causes.</p>
+        <button class="text-b text-lg font-semibold flex items-center justify-start gap-3">Learn More<i
+            class="ph ph-arrow-right text-3xl"></i></button>
+      </div>
+      <div class="procedure w-full flex-col justify-between aspect-video p-5 rounded-2xl bg-f">
+        <h4 class="text-3xl text-b font-bold capitalize">Surgical Intervention</h4>
+        <p class="text-base text-t leading-[1.1 font-medium">Where medication or other non-invasive treatments
+          are ineffective, surgery may be necessary to remove tumors, repair damaged tissues, correct structural
+          abnormalities, or address other medical issues.</p>
+        <button class="text-b text-lg font-semibold flex items-center justify-start gap-3">Learn More<i
+            class="ph ph-arrow-right text-3xl"></i></button>
+      </div>
+      <div class="procedure w-full flex-col justify-between aspect-video p-5 rounded-2xl bg-f">
+        <h4 class="text-3xl text-b font-bold capitalize">Immunotherapy</h4>
+        <p class="text-base text-t leading-[1.1 font-medium">Immunotherapy works by boosting the body's immune
+          system to help fight cancer or other diseases. It can be used to treat certain types of cancer and
+          autoimmune disorders.</p>
+        <button class="text-b text-lg font-semibold flex items-center justify-start gap-3">Learn More<i
+            class="ph ph-arrow-right text-3xl"></i></button>
+      </div>
+      <div class="procedure w-full flex-col justify-between aspect-video p-5 rounded-2xl bg-f">
+        <h4 class="text-3xl text-b font-bold capitalize">Psychological Support</h4>
+        <p class="text-base text-t leading-[1.1 font-medium">Counseling, support groups, and other mental health
+          services may be provided to help patients cope with the emotional and psychological aspects of their
+          condition & treatment process.</p>
+        <button class="text-b text-lg font-semibold flex items-center justify-start gap-3">Learn More<i
+            class="ph ph-arrow-right text-3xl"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="treatment" class="flex-col items-center justify-center gap-9">
+  <div class="w-3/5 flex-col items-center justify-center gap-1.5">
+    <h3 class="text-4xl text-d text-center font-bold capitalize">frequently asked questions</h3>
+    <p class="text-t text-lg text-center font-medium">Here are some of the frequently asked questions regarding
+      healthcare.</p>
+  </div>
+  <div class="w-full grid grid-cols-2 gap-11">
+    <div class="w-full grid grid-flow-row gap-7">
+      <div class="w-full flex-col gap-5 border-b border-l]">
+        <input type="radio" id="faq1" name="accordion" class="hidden" checked>
+        <label for="faq1"
+          class="text-2xl text-b font-bold py-3 px-7 cursor-pointer w-full flex justify-between label capitalize">What
+          is telemedicine & TeleMedi? <i class="ph-fill ph-question text-3xl"></i></label>
+        <div class="hidden max-h-0 px-14 pb-5 arcontent">
+          <p class="text-t]">Telemedicine involves providing medical care and consultations remotely using
+            telecommunications technology. TeleMedi allows patients to consult with healthcare providers via video
+            conferencing, phone calls, or secure messaging platforms.</p>
+        </div>
+      </div>
+      <div class="w-full flex-col gap-5 border-b border-l]">
+        <input type="radio" id="faq2" name="accordion" class="hidden">
+        <label for="faq2"
+          class="text-2xl text-b font-bold py-3 px-7 cursor-pointer w-full flex justify-between label capitalize">What
+          appointments are suitable for telemedicine? <i class="ph-fill ph-question text-3xl"></i></label>
+        <div class="hidden max-h-0 px-14 pb-5 arcontent">
+          <p class="text-t]">Telemedicine appointments are suitable for a wide range of non-emergency medical
+            concerns, including routine check-ups, follow-up visits, medication management, mental health
+            consultations, and minor illnesses or injuries.</p>
+        </div>
+      </div>
+      <div class="w-full flex-col gap-5 border-b border-l]">
+        <input type="radio" id="faq3" name="accordion" class="hidden">
+        <label for="faq3"
+          class="text-2xl text-b font-bold py-3 px-7 cursor-pointer w-full flex justify-between label capitalize">How
+          do I schedule a telemedicine appointment? <i class="ph-fill ph-question text-3xl"></i></label>
+        <div class="hidden max-h-0 px-14 pb-5 arcontent">
+          <p class="text-t]">You can schedule a telemedicine appointment by contacting our office during business
+            hours. Our staff will assist you in scheduling a convenient time for your virtual consultation.</p>
+        </div>
+      </div>
+      <div class="w-full flex-col gap-5 border-b border-l]">
+        <input type="radio" id="faq4" name="accordion" class="hidden">
+        <label for="faq4"
+          class="text-2xl text-b font-bold py-3 px-7 cursor-pointer w-full flex justify-between label capitalize">What
+          technology do I need for telemedicine? <i class="ph-fill ph-question text-3xl"></i></label>
+        <div class="hidden max-h-0 px-14 pb-5 arcontent">
+          <p class="text-t]">To participate in a telemedicine appointment, you will need a smartphone, tablet, or
+            computer with a webcam and microphone. You will also need a stable internet connection to ensure clear
+            communication during the appointment.</p>
+        </div>
+      </div>
+    </div>
+    <div class="w-full grid grid-flow-row gap-7">
+      <div class="w-full flex-col gap-5 border-b border-l]">
+        <input type="radio" id="faq5" name="accordion" class="hidden">
+        <label for="faq5"
+          class="text-2xl text-b font-bold py-3 px-7 cursor-pointer w-full flex justify-between label capitalize">how
+          to deal with technical issues in a telemedicine appointment? <i
+            class="ph-fill ph-question text-3xl"></i></label>
+        <div class="hidden max-h-0 px-14 pb-5 arcontent">
+          <p class="text-t]">If you experience technical difficulties during your telemedicine appointment, please
+            contact our office immediately for assistance. Our staff will work to resolve any technical issues and
+            ensure a smooth and successful consultation.</p>
+        </div>
+      </div>
+      <div class="w-full flex-col gap-5 border-b border-l]">
+        <input type="radio" id="faq6" name="accordion" class="hidden">
+        <label for="faq6"
+          class="text-2xl text-b font-bold py-3 px-7 cursor-pointer w-full flex justify-between label capitalize">Can
+          prescriptions be issued during a telemedicine appointment? <i
+            class="ph-fill ph-question text-3xl"></i></label>
+        <div class="hidden max-h-0 px-14 pb-5 arcontent">
+          <p class="text-t]">Yes, healthcare providers can issue prescriptions during telemedicine appointments for
+            certain medications, when appropriate and medically necessary. Prescription refill requests can also be
+            processed during telemedicine appointments.</p>
+        </div>
+      </div>
+      <div class="w-full flex-col gap-5 border-b border-l]">
+        <input type="radio" id="faq7" name="accordion" class="hidden">
+        <label for="faq7"
+          class="text-2xl text-b font-bold py-3 px-7 cursor-pointer w-full flex justify-between label capitalize">how
+          about physical examination or diagnostic tests? <i class="ph-fill ph-question text-3xl"></i></label>
+        <div class="hidden max-h-0 px-14 pb-5 arcontent">
+          <p class="text-t]">In some cases, a physical examination or diagnostic tests may be necessary to fully
+            evaluate your medical condition. If needed, your healthcare provider will discuss options for in-person
+            evaluation or laboratory testing.</p>
+        </div>
+      </div>
+      <div class="w-full flex-col gap-5 border-b border-l]">
+        <input type="radio" id="faq8" name="accordion" class="hidden">
+        <label for="faq8"
+          class="text-2xl text-b font-bold py-3 px-7 cursor-pointer w-full flex justify-between label capitalize">can
+          i access medical records during telemedicine? <i class="ph-fill ph-question text-3xl"></i></label>
+        <div class="hidden max-h-0 px-14 pb-5 arcontent">
+          <p class="text-t]">Yes, medical records from telemedicine appointments are securely stored in our
+            electronic health records system. You can access your telemedicine visit summaries and medical records
+            through our patient portal for your reference and follow-up care.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="appointments" class="w-full aspect-video grid grid-cols-2 gap-14">
+  <div class="w-full aspect-square bg-[url('../static/imgs/jpgs/doctor.jpg')] bg-center bg-cover rounded-xl"></div>
+  <div class="w-full aspect-square flex-col justify-between py-7 pr-3">
+    <h2 class="text-d text-6xl font-bold capitalize">make an <br>appointment</h2>
+    <p class="text-xl text-t font-semibold">Enter your contact details in the form below and schedule an
+      appointment with one of our specialists.</p>
+    <form action="" method="get" accept-charset="utf-8" class="w-full flex-wrap gap-5 px-9 pl-3.5">
+      <input id="name" type="text"
+        class="block text-t text-lg font-medium px-7 py-3 outline outline-2 outline-t placeholder:text-t placeholder:opacity-65 rounded w-full capitalize"
+        placeholder="Enter your name" required>
+      <input id="email" type="email"
+        class="block text-t text-lg font-medium px-7 py-3 outline outline-2 outline-t placeholder:text-t placeholder:opacity-65 rounded w-full"
+        placeholder="Enter your email" required>
+      <div class="w-full items-center justify-between gap-5">
+        <input id="phone" type="tel"
+          class="block text-t text-lg font-medium px-7 py-3 outline outline-2 outline-t placeholder:text-t placeholder:opacity-65 rounded w-full"
+          placeholder="Phone Number" required>
+        <select id="app" type="text"
+          class="block text-t text-lg bg-w font-medium px-7 py-3 outline outline-2 outline-t rounded" required>
+          <option value="select app" disabled selected>Choose Mobile App</option>
+          <option value="Doxy.me">Doxy.me</option>
+          <option value="Zoom">Zoom</option>
+          <option value="Microsoft Teams">Microsoft Teams</option>
+        </select>
+      </div>
+      <div class="w-full items-center justify-between gap-5">
+        <input id="diagnosis" type="text"
+          class="block text-t text-lg font-medium px-7 py-3 outline outline-2 outline-t placeholder:text-t placeholder:opacity-65 rounded w-full capitalize"
+          placeholder="Body Part/ Problem" required>
+        <button type="submit"
+          class="w-fit text-w text-lg py-3 px-9 rounded font-medium bg-b outline outline-2 outline-b capitalize">submit&nbsp;details</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section id="blogs" class="flex-col items-center gap-9">
+  <div class="w-full items-end justify-between">
+    <h3 class="text-4xl text-d font-bold capitalize">recommend articles for you</h3>
+    <button class="text-b text-xl font-medium flex items-center justify-end gap-2">See All <i
+        class="ph ph-circles-four text-3xl"></i></button>
+  </div>
+  <div class="w-full grid grid-cols-2 grid-rows-3 gap-9">
+    <article class="w-full items-center gap-5">
+      <img src="../static/imgs/jpgs/blood.jpg" alt="article telemedicine image"
+        class="h-52 aspect-square object-cover object-center rounded-2xl">
+      <div class="w-full h-full flex-col justify-between py-1.5">
+        <span class="text-t font-medium capitalize">healthcare | 24th Jan 2024</span>
+        <h5 class="text-d text-2xl font-bold">The Importance of Preventive Care: How Regular Check-ups Can Save
+          Lives</h5>
+        <button class="text-b text-lg font-medium flex items-center gap-2">Read More<i
+            class="ph ph-arrow-right text-2xl"></i></button>
+      </div>
+    </article>
+    <article class="w-full items-center gap-5">
+      <img src="../static/imgs/jpgs/machine.jpg" alt="article telemedicine image"
+        class="h-52 aspect-square object-cover object-center rounded-2xl">
+      <div class="w-full h-full flex-col justify-between py-1.5">
+        <span class="text-t font-medium capitalize">Medical Engineering | 11th October 2023</span>
+        <h5 class="text-d text-2xl font-bold">Innovations in Healthcare: Exploring the Latest Technologies in Our
+          Hospital</h5>
+        <button class="text-b text-lg font-medium flex items-center gap-2">Read More<i
+            class="ph ph-arrow-right text-2xl"></i></button>
+      </div>
+    </article>
+    <article class="w-full items-center gap-5">
+      <img src="../static/imgs/jpgs/hero.jpg" alt="article telemedicine image"
+        class="h-52 aspect-square object-cover object-center rounded-2xl">
+      <div class="w-full h-full flex-col justify-between py-1.5">
+        <span class="text-t font-medium capitalize">Doctors & Nurses | 03rd March 2021</span>
+        <h5 class="text-d text-2xl font-bold">A Day in the Life of a Nurse: Behind the Scenes at Our Hospital</h5>
+        <button class="text-b text-lg font-medium flex items-center gap-2">Read More<i
+            class="ph ph-arrow-right text-2xl"></i></button>
+      </div>
+    </article>
+    <article class="w-full items-center gap-5">
+      <img src="../static/imgs/jpgs/microscope.jpg" alt="article telemedicine image"
+        class="h-52 aspect-square object-cover object-center rounded-2xl">
+      <div class="w-full h-full flex-col justify-between py-1.5">
+        <span class="text-t font-medium capitalize">medical Research | 17th July 2022</span>
+        <h5 class="text-d text-2xl font-bold">The Future of Healthcare: Trends and Predictions for the Next Decade
+        </h5>
+        <button class="text-b text-lg font-medium flex items-center gap-2">Read More<i
+            class="ph ph-arrow-right text-2xl"></i></button>
+      </div>
+    </article>
+    <article class="w-full items-center gap-5">
+      <img src="../static/imgs/jpgs/waiting.jpg" alt="article telemedicine image"
+        class="h-52 aspect-square object-cover object-center rounded-2xl">
+      <div class="w-full h-full flex-col justify-between py-1.5">
+        <span class="text-t font-medium capitalize">Treatments | 27th November 2020</span>
+        <h5 class="text-d text-2xl font-bold">Patient Success Stories: Inspiring Tales of Healing and Recovery
+        </h5>
+        <button class="text-b text-lg font-medium flex items-center gap-2">Read More<i
+            class="ph ph-arrow-right text-2xl"></i></button>
+      </div>
+    </article>
+    <article class="w-full items-center gap-5">
+      <img src="../static/imgs/jpgs/home.jpg" alt="article telemedicine image"
+        class="h-52 aspect-square object-cover object-center rounded-2xl">
+      <div class="w-full h-full flex-col justify-between py-1.5">
+        <span class="text-t font-medium capitalize">Telemedicine | 09th February 2021</span>
+        <h5 class="text-d text-2xl font-bold">Embracing Telemedicine: Revolutionizing Healthcare Delivery</h5>
+        <button class="text-b text-lg font-medium flex items-center gap-2">Read More<i
+            class="ph ph-arrow-right text-2xl"></i></button>
+      </div>
+    </article>
+  </div>
+</section>
+
+{{ template "partials/footing" .}}
