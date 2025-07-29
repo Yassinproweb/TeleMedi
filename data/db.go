@@ -48,18 +48,19 @@ func InitDB() {
 		log.Fatal("Failed to create patients table:", err)
 	}
 
-	// patients table
+	// appointments table
 	_, err = DB.Exec(`
-		CREATE TABLE IF NOT EXISTS patients (
+		CREATE TABLE IF NOT EXISTS appointments (
 			id INTEGER PRIMARY KEY AUTOINCREMENT,
 			doctor_name TEXT NOT NULL,
 			patient_name TEXT NOT NULL,
 			diagnosis TEXT NOT NULL,
-			time TEXT NOT NULL,
+			time DATETIME DEFAULT CURRENT_TIMESTAMP,
 			type TEXT NOT NULL,
 			platform TEXT NOT NULL,
 			FOREIGN KEY (doctor_name) REFERENCES doctors(name),
-			FOREIGN KEY (patient_name) REFERENCES patients(name)
+			FOREIGN KEY (patient_name) REFERENCES patients(name),
+			FOREIGN KEY (diagnosis) REFERENCES patients(diagnosis)
 		)
 	`)
 	if err != nil {
